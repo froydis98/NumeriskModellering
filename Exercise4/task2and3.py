@@ -11,7 +11,12 @@ def myPower(T, Niter):
     for _ in range(Niter):
         xv = xv @ T
         xv = xv/abs(math.sqrt(xv@xv))
-    highestEigenvalue = xv @ T @ xv
+    highestEigenvalue = abs(xv @ T @ xv)
     return xv, highestEigenvalue
 
-print(myPower(ANormalized, 10))
+vec, val = myPower(ANormalized, 10)
+A2 = ANormalized - (val * np.outer(vec, vec))
+x = np.around(A2 @ vec)
+vec2, val2 = myPower(A2, 10)
+A3 = A2 - (val2 * np.outer(vec2, vec2))
+
