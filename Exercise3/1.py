@@ -14,6 +14,7 @@ def myGauss(A, b):
             x = Combined[j][i]/Combined[i][i]
             for k in range(Width):
                 Combined[j][k] = Combined[j][k] - x * Combined[i][k]
+                
     solved = []
     for i in range(Height-1, -1, -1):
         solved.append(Combined[i][Height])
