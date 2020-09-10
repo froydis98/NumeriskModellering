@@ -7,22 +7,11 @@ ANormalized = A.transpose() + A
 values, vectors = np.linalg.eig(ANormalized)
 
 def myPower(T, Niter):
-    xVector = np.random.rand(n) * 10
-    HighesVal = 0
-    index = 0
-    for i in range(len(T)):
-        if HighesVal < T[i]:
-            HighesVal = T[i]
-            index = i
+    xv = np.random.rand(n) * 10
     for _ in range(Niter):
-        xVector = xVector @ ANormalized
-        xVector = xVector/abs(math.sqrt(xVector@xVector))
-    correspondingVector = []
-    for i in range(len(T)):
-        correspondingVector.append(abs(vectors[i][index]))
-    if (np.around(correspondingVector) == np.around(xVector)).all():
-        return HighesVal, xVector
-    else: 
-        return 'Fant ingen'
+        xv = xv @ T
+        xv = xv/abs(math.sqrt(xv@xv))
+    highestEigenvalue = xv @ T @ xv
+    return xv, highestEigenvalue
 
-print(myPower(values, 3))
+print(myPower(ANormalized, 10))
