@@ -86,6 +86,13 @@ print(L)
 print(U)
 print(P)
 
+# Find least squared
+B=[[3, 1], [1, -2], [1, -1], [2, 3]]
+c=[5, -3, 1, 6] 
+leastSquared = np.linalg.lstsq(B, c, rcond=0.01)
+print(leastSquared)
+
+
 
 
 
