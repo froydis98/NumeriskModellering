@@ -31,5 +31,15 @@ def myNewton(f, x, df):
     return x
 
 print(myNewton(f, 0.1, df))
-
 print(optimize.newton(f, 0.1))
+
+# Solve task 1 in mock exam
+def fMock(x):
+    return x**2 - np.exp(-2*x)
+
+def dfMock(x):
+    return 2*x + 2*np.exp(-2*x)
+
+print(myNewton(fMock, 0.6, dfMock))
+print(optimize.newton(fMock, 0.6))
+
