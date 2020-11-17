@@ -1,5 +1,6 @@
 import numpy as np
 from scipy.linalg import lu, inv
+import math
 
 # Task 1
 def secant(f, x0, x1, eps_r, eps_a):
@@ -92,6 +93,51 @@ c=[5, -3, 1, 6]
 leastSquared = np.linalg.lstsq(B, c, rcond=0.01)
 print(leastSquared)
 
+
+# Task 3
+Anp = np.array(A)
+print("Characteristic equation: ", np.poly(A))
+print("Eigenvals:", np.linalg.eigvals(A))
+ANormalized = Anp.transpose() + Anp
+values, vectors = np.linalg.eig(ANormalized)
+print("Eigenvectors: ", vectors)
+print("Eigenvalues: ", values)
+
+def myPower(T, Niter):
+    xv = np.random.rand(3) * 3
+    for _ in range(Niter):
+        xv = xv @ T
+        xv = xv/abs(math.sqrt(xv@xv))
+    highestEigenvalue = abs(xv @ T @ xv)
+    return xv, highestEigenvalue
+
+vec, val = myPower(ANormalized, 3)
+print(vec, val)
+
+# Deflate the largest eigenvalue of matrix A
+Z = vec.transpose() * vec * val
+Anew = A - Z
+vec2, val2 = myPower(Anew, 3)
+print(val2)
+
+# Task 4
+
+x=[1900, 1950, 1980, 1990, 2000, 2010]
+y=[400, 550, 980, 1130, 1270, 1390]
+xsum = 0
+ysum = 0
+xsquared = 0
+xy = 0
+
+for i in range (len(x)):
+    xsum += x[i]
+    ysum += y[i]
+    xsquared += x[i]*x[i]
+    xy += x[i]*y[i]
+print(xy)
+M = (len(x)*xy-xsum*ysum)/(len(x)*xsquared-xsum**2)
+b = (ysum-M*xsum)/(len(x))
+print(M, b)
 
 
 
