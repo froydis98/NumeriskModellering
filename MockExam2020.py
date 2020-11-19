@@ -1,6 +1,7 @@
 import numpy as np
 from scipy.linalg import lu, inv
 import math
+import matplotlib.pylab as plt
 
 # Task 1
 def secant(f, x0, x1, eps_r, eps_a):
@@ -141,4 +142,6 @@ print(M, b)
 
 
 
+
+# Task 7
 
